@@ -1,7 +1,7 @@
 import telebot
 from telebot import types, apihelper
 
-TOKEN = "8237088507:AAES1c5TlsVZoIUYOT-zQL6ti89bvop-_pQ"
+TOKEN = "8237088507:AAG-VHB9UC6BmQOsxSbCwAMmSKj0nrWia3I"
 bot = telebot.TeleBot(TOKEN)
 
 # Увеличиваем таймауты до максимума, чтобы при медленном VPN бот не выдавал ошибку
