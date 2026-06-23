@@ -3,7 +3,7 @@ import threading
 import telebot
 from flask import Flask
 
-TOKEN = "8237088507:AAFmbkYCiX4bOadOKhqDDMu8wV76TuE907I"
+TOKEN = "8237088507:AAFmbkYCiX4b0ad0KhqDDMu8wV76TuE907I"
 bot = telebot.TeleBot(TOKEN)
 
 def get_back_keyboard():
