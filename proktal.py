@@ -1,17 +1,11 @@
+import os
+import threading
 import telebot
-from telebot import types, apihelper
+from flask import Flask
 
 TOKEN = "8237088507:AAG-VHB9UC6BmQOsxSbCwAMmSKj0nrWia3I"
 bot = telebot.TeleBot(TOKEN)
 
-# Увеличиваем таймауты до максимума, чтобы при медленном VPN бот не выдавал ошибку
-apihelper.READ_TIMEOUT = 500
-apihelper.CONNECT_TIMEOUT = 500
-
-# Твой словарь для данных
-user_data_chat_id = {}
-
-# Клавиатуры
 def get_back_keyboard():
     markup = types.ReplyKeyboardMarkup(resize_keyboard=True, one_time_keyboard=True)
     markup.add(types.KeyboardButton("➡️ Назад"))
@@ -108,12 +102,17 @@ def process_phone_step(message):
     print(f"Новая заявка! Имя: {user_data_chat_id[chat_id]['Имя']}, Фамилия: {user_data_chat_id[chat_id]['Фамилия']}, Телефон: {user_data_chat_id[chat_id]['Телефон']}")
     send_main_menu(chat_id, "✅ Спасибо! Ваши данные успешно сохранены.")
 
-# Запуск
-if __name__ == '__main__':
-    print("Бот запущен...")
-    
-    # Просто удаляем вебхук без лишних настроек
+app = Flask(__name__)
+
+@app.route('/')
+def home():
+    return "OK"
+
+def run_bot():
     bot.remove_webhook()
-    
-    # Запускаем обычный опрос
-    bot.polling(none_stop=True, timeout=60, long_polling_timeout=60)
+    bot.infinity_polling(none_stop=True)
+
+if name == "__main__":
+    threading.Thread(target=run_bot).start()
+    port = int(os.environ.get("PORT", 5000))
+    app.run(host="0.0.0.0", port=port)
